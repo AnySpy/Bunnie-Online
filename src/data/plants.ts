@@ -6,4 +6,9 @@ export const plants: Plant[] = [
         name: "Carrot",
         growth_duration_ms: 2500
     },
+    {
+        id: 1,
+        name: "Hay",
+        growth_duration_ms: 3500
+    },
 ]
