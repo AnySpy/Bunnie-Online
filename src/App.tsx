@@ -4,6 +4,9 @@ import type { Plant } from './types/plant'
 import { plants } from './data/plants'
 import { generateFarmTiles } from './services/farmTiles'
 
+import emptyFarmImage from './assets/Farmland_Empty.png';
+import growingFarmImage from './assets/Farmland_Growing.png';
+
 import './App.css'
 
 function App() {
@@ -25,6 +28,7 @@ function App() {
             id: selectedTile.id,
             stored_item: null,
             completion_timestamp_ms: null,
+            growth_stage_img: emptyFarmImage,
           }
           
           newTilesArr.push(newTile);
@@ -50,6 +54,7 @@ function App() {
             id: tile.id,
             stored_item: plant,
             completion_timestamp_ms: Date.now() + plant.growth_duration_ms,
+            growth_stage_img: growingFarmImage
           };
 
           newTilesArr.push(newTile);
@@ -68,7 +73,10 @@ function App() {
     <div className='farm-container'>
       <div className='plot-container'>
         {farmTilesArray.map((tile =>
-          <button onClick={() => handleButtonClick(tile)} key={tile.id}>{(tile.stored_item != null) ? `${tile.stored_item.name}` : "Pick Plant"}</button>
+          <button onClick={() => handleButtonClick(tile)} key={tile.id}>
+            <img src={tile.growth_stage_img} />
+            {(tile.stored_item != null) ? `${tile.stored_item.name}` : "Pick Plant"}
+          </button>
         ))}
       </div>
 
